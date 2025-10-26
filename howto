@@ -1,0 +1,11 @@
+# 1. Read the Base64 string from the file
+$Base64 = Get-Content -Path 'C:\Encoded\MyScript_Base64.txt' -Raw
+
+# 2. Decode the Base64 string back to bytes
+$DecodedBytes = [System.Convert]::FromBase64String($Base64)
+
+# 3. Convert the bytes back to a UTF8-encoded string (matching the original encoding)
+$DecodedScript = [System.Text.Encoding]::UTF8.GetString($DecodedBytes)
+
+# 4. Execute the script code stored in the variable
+Invoke-Expression $DecodedScript
